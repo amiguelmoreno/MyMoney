@@ -17,3 +17,7 @@ export function filterTransactionsByMonth(transactions) {
     (transaction) => new Date(transaction.date) >= startOfMonth
   );
 }
+
+export function generateUniqueID() {
+  return Date.now().toString();
+}

@@ -1,30 +1,34 @@
 import styled from "styled-components";
-import Filter from "../../ui/Filter";
+import FilterDrop from "../../ui/FilterDrop";
 import SortBy from "../../ui/SortBy";
 
-const TableOperations = styled.div`
+const StyledFiltersContainer = styled.div`
   display: flex;
-  align-items: center;
-  gap: 1.6rem;
+  gap: 0.6rem;
+  border-radius: 10px;
+
+  select {
+    background-color: var(--color-brand-600);
+    color: white;
+  }
 `;
 
 function TransactionsTableOperations() {
   return (
-    <TableOperations>
-      <Filter
+    <StyledFiltersContainer>
+      <FilterDrop
         filterField="status"
         options={[
-          { value: "all", label: "All" },
+          { value: "all", label: "All Status" },
           { value: "pending", label: "🟠 Pending" },
           { value: "received", label: "✅ Received" },
-          { value: "sended", label: "💸 Sent" },
+          { value: "sent", label: "💸 Sent" },
         ]}
       />
-
-      <Filter
+      <FilterDrop
         filterField="date"
         options={[
-          { value: "all", label: "All" },
+          { value: "all", label: "All Time" },
           { value: "day-1", label: "Last day" },
           { value: "day-7", label: "Last 7 days" },
           { value: "month", label: "This month" },
@@ -32,7 +36,23 @@ function TransactionsTableOperations() {
           { value: "day-90", label: "Last 90 days" },
         ]}
       />
-
+      <FilterDrop
+        filterField="category"
+        options={[
+          { value: "all", label: "All Categories" },
+          { value: "groceries", label: "🛒 Groceries" },
+          { value: "housing", label: "🏠 Housing" },
+          { value: "transportation", label: "🚗 Transportation" },
+          { value: "health", label: "🏥 Health" },
+          { value: "entertainment", label: "🎬 Entertainment" },
+          { value: "education", label: "📚 Education" },
+          { value: "clothing", label: "👕 Clothing and Accessories" },
+          { value: "travel", label: "✈️ Travel and Vacations" },
+          { value: "technology", label: "🔌 Technology" },
+          { value: "debt", label: "💳 Debts and Loans" },
+          { value: "gifts", label: "🎁 Gifts and Donations" },
+        ]}
+      ></FilterDrop>
       <SortBy
         options={[
           { value: "concept-asc", label: "Sort by concept name (A-Z)" },
@@ -43,7 +63,7 @@ function TransactionsTableOperations() {
           { value: "date-desc", label: "Sort by date (newest first)" },
         ]}
       />
-    </TableOperations>
+    </StyledFiltersContainer>
   );
 }
 

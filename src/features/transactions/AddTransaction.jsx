@@ -11,7 +11,7 @@ function AddTransaction() {
           <ButtonWithIcon icon={<HiMiniPlus />}>New transaction</ButtonWithIcon>
         </Modal.Open>
         <Modal.Window name="cabin-form">
-          <CreateTransactionForm />
+          <CreateTransactionForm type="create" />
         </Modal.Window>
       </Modal>
     </div>

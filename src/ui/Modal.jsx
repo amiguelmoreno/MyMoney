@@ -56,10 +56,10 @@ const Button = styled.button`
 const ModalContext = createContext();
 
 function Modal({ children }) {
-  const [openName, setOpenName] = useState("");
+  const [openName, setOpenName] = useState(null);
 
-  const close = () => setOpenName("");
-  const open = setOpenName;
+  const close = () => setOpenName(null);
+  const open = (opensWindowName) => setOpenName(opensWindowName);
 
   return (
     <ModalContext.Provider value={{ openName, close, open }}>
@@ -76,6 +76,7 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
+
   const ref = useOutsideClick(close);
 
   if (name !== openName) return null;
@@ -86,6 +87,7 @@ function Window({ children, name }) {
         <Button onClick={close}>
           <HiXMark />
         </Button>
+
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledModal>
     </Overlay>,

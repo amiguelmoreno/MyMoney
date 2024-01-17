@@ -1,3 +1,4 @@
+import { generateUniqueID } from "../src/utils/helpers";
 import supabase from "./supabase";
 
 export async function createTransaction(newTransaction) {
@@ -35,6 +36,21 @@ export async function deleteTransaction(id) {
   if (error) {
     console.error(error);
     throw new Error("Transaction could not be deleted");
+  }
+
+  return data;
+}
+
+export async function duplicateTransaction(originTransaction) {
+  let query = supabase.from("transactions");
+
+  query = query.insert([{ ...originTransaction, id: generateUniqueID() }]);
+
+  const { data, error } = await query.select().single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Transaction could not be created");
   }
 
   return data;

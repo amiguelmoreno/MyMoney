@@ -6,41 +6,35 @@ import Select from "../../ui/SelectForm";
 import Heading from "../../ui/Heading";
 import { useForm } from "react-hook-form";
 import Textarea from "../../ui/Textarea";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createTransaction } from "../../../services/apiTransactions";
-import toast from "react-hot-toast";
+import { useCreateTransaction } from "./useCreateTransaction";
+import { useDeleteTransaction } from "./useDeleteTransaction";
 
-function CreateTransactionForm({ onCloseModal }) {
+function CreateTransactionForm({ onCloseModal, type, transaction }) {
+  const { deleteTransaction } = useDeleteTransaction();
+  const { createTransaction } = useCreateTransaction();
   const { register, reset, handleSubmit, formState } = useForm();
   const { errors } = formState;
 
-  const queryClient = useQueryClient();
-
-  const { mutate, isLoading: isCreating } = useMutation({
-    mutationFn: createTransaction,
-    onSuccess: () => {
-      toast.success("New transaction successfully created");
-      queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      onCloseModal();
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
-
   function onSubmit(data) {
-    mutate(data);
+    createTransaction(data);
+
+    if (transaction) deleteTransaction(transaction.id);
+
+    reset();
+    onCloseModal();
     console.log(data);
   }
 
   return (
     <>
-      <Heading>New transaction</Heading>
+      {type === "create" && <Heading>New transaction</Heading>}
+      {type === "edit" && <Heading>Edit transaction</Heading>}
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormRow label="Concept" error={errors?.concept?.message}>
           <Input
             type="text"
             id="concept"
-            defaultValue="a"
+            defaultValue={transaction?.concept || "b"}
             {...register("concept", {
               required: "This field is required",
             })}
@@ -51,7 +45,7 @@ function CreateTransactionForm({ onCloseModal }) {
           <Input
             type="text"
             id="amount"
-            defaultValue={4}
+            defaultValue={transaction?.amount || 4}
             {...register("amount", {
               required: "This field is required",
               pattern: {
@@ -70,7 +64,7 @@ function CreateTransactionForm({ onCloseModal }) {
           <Input
             type="date"
             id="date"
-            defaultValue="2021-10-12"
+            defaultValue={transaction?.date || "2021-10-12"}
             {...register("date", {
               required: "This field is required",
             })}
@@ -92,7 +86,7 @@ function CreateTransactionForm({ onCloseModal }) {
           <Input
             type="text"
             id="from"
-            defaultValue="Migue"
+            defaultValue={transaction?.from || "Migue"}
             {...register("from", {
               required: "This field is required",
             })}
@@ -103,7 +97,7 @@ function CreateTransactionForm({ onCloseModal }) {
           <Select
             type="text"
             id="account"
-            defaultValue="BBVA"
+            defaultValue={transaction?.account || "BBVA"}
             {...register("account", {
               required: "This field is required",
             })}
@@ -122,10 +116,8 @@ function CreateTransactionForm({ onCloseModal }) {
           <Textarea
             type="number"
             id="description"
-            defaultValue="FASDFHASKL F FHASDFASD S DASDFA SDAS"
-            {...register("description", {
-              required: "This field is required",
-            })}
+            placeholder="Some details about the transaction..."
+            {...register("description", {})}
           />
         </FormRow>
 
@@ -133,21 +125,47 @@ function CreateTransactionForm({ onCloseModal }) {
           <Select
             type="text"
             id="status"
+            defaultValue={transaction?.status || "received"}
             {...register("status", {
               required: "This field is required",
             })}
           >
-            <option value="Received">✅ Received</option>
-            <option value="Pending">🟠 Pending</option>
-            <option value="Sent">💸 Sent</option>
+            <option value="received">✅ Received</option>
+            <option value="pending">🟠 Pending</option>
+            <option value="sent">💸 Sent</option>
+          </Select>
+        </FormRow>
+
+        <FormRow label="Category" error={errors?.status?.category}>
+          <Select
+            type="text"
+            id="category"
+            defaultValue={transaction?.category || "groceries"}
+            {...register("category", {
+              required: "This field is required",
+            })}
+          >
+            <option value="groceries">🛒 Groceries</option>
+            <option value="housing">🏠 Housing</option>
+            <option value="transportation">🚗 Transportation</option>
+            <option value="health">🏥 Health</option>
+            <option value="entertainment">🎬 Entertainment</option>
+            <option value="education">📚 Education</option>
+            <option value="clothing">👕 Clothing and Accessories</option>
+            <option value="travel">✈️ Travel and Vacations</option>
+            <option value="technology">🔌 Technology</option>
+            <option value="debt">💳 Debts and Loans</option>
+            <option value="gifts">🎁 Gifts and Donations</option>
           </Select>
         </FormRow>
 
         <FormRow>
-          <Button variation="secondary" type="reset">
+          <Button variation="secondary" type="reset" onClick={onCloseModal}>
             Cancel
           </Button>
-          <Button type="submit">Add Transaction</Button>
+
+          {type === "create" && <Button type="submit">Add Transaction</Button>}
+          {type === "edit" && <Button type="submit">Edit Transaction</Button>}
         </FormRow>
       </Form>
     </>

@@ -16,26 +16,37 @@ function TransactionTable() {
   if (isLoading) return <Spinner />;
   if (!transactions.length) return <Empty resourceName="transactions" />;
 
-  //filter date
-  const filterValue = searchParams.get("date") || "all";
+  let filteredTransactions = transactions;
 
-  let filteredTransactions;
-  if (filterValue === "all") filteredTransactions = transactions;
-  if (filterValue === "day-1")
+  //filter date
+  const filterDateValue = searchParams.get("date") || "all";
+  if (filterDateValue === "day-1")
     filteredTransactions = filterTransactionsByDate(transactions, 1);
-  if (filterValue === "day-7")
+  if (filterDateValue === "day-7")
     filteredTransactions = filterTransactionsByDate(transactions, 7);
-  if (filterValue === "month")
+  if (filterDateValue === "month")
     filteredTransactions = filterTransactionsByMonth(transactions);
-  if (filterValue === "day-30")
+  if (filterDateValue === "day-30")
     filteredTransactions = filterTransactionsByDate(transactions, 30);
-  if (filterValue === "day-90")
+  if (filterDateValue === "day-90")
     filteredTransactions = filterTransactionsByDate(transactions, 90);
 
   //filter status
+  const filterStatusValue = searchParams.get("status") || "all";
+  if (filterStatusValue !== "all")
+    filteredTransactions = filteredTransactions.filter(
+      (transaction) => transaction.status === filterStatusValue
+    );
+
+  // filter category
+  const filterCategoryValue = searchParams.get("category") || "all";
+  if (filterCategoryValue !== "all") {
+    filteredTransactions = filteredTransactions.filter(
+      (transaction) => transaction.category === filterCategoryValue
+    );
+  }
 
   // sort
-
   const sortBy = searchParams.get("sortBy") || "date-desc";
   const [field, direction] = sortBy.split("-");
   const modifier = direction === "asc" ? 1 : -1;
@@ -53,7 +64,7 @@ function TransactionTable() {
   });
 
   return (
-    <Table columns="2fr 1fr 1fr 1fr 1fr 1fr 1fr  0.5fr">
+    <Table columns="2fr 1fr 1fr 1fr 1fr 1fr 1fr 0.8fr 0.5fr">
       <Table.Header>
         <div>Concept</div>
         <div>Amount</div>
@@ -61,6 +72,7 @@ function TransactionTable() {
         <div>To</div>
         <div>From</div>
         <div>Account</div>
+        <div>Category</div>
         <div>Status</div>
       </Table.Header>
       <Table.Body

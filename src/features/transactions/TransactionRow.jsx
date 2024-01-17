@@ -3,10 +3,9 @@ import Table from "../../ui/Table";
 import { useDeleteTransaction } from "./useDeleteTransaction";
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
+import TransactionMenu from "./TransactionMenu";
 
 function TransactionRow({ transaction }) {
-  const { deleteTransaction } = useDeleteTransaction();
-
   return (
     <Table.Row>
       <div>{transaction.concept}</div>
@@ -15,15 +14,18 @@ function TransactionRow({ transaction }) {
       <div>{transaction.to}</div>
       <div>{transaction.from}</div>
       <div>{transaction.account}</div>
+      <div>{transaction.category}</div>
       <div>{transaction.status}</div>
       <div>
-        <Button onClick={() => deleteTransaction(transaction.id)}>
-          {/*  <HiCog8Tooth /> */}
-          <HiMiniTrash />
-        </Button>
+        <TransactionMenu transaction={transaction}></TransactionMenu>
       </div>
     </Table.Row>
   );
 }
 
 export default TransactionRow;
+
+{
+  /* ;
+   */
+}

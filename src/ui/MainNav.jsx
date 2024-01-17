@@ -5,6 +5,8 @@ import {
   HiMiniWallet,
   HiAdjustmentsVertical,
 } from "react-icons/hi2";
+import { GrSettingsOption } from "react-icons/gr";
+
 import { NavLink } from "react-router-dom";
 
 const NavList = styled.ul`
@@ -77,7 +79,8 @@ function MainNav() {
         </li>
         <li>
           <StyledNavLink to="/settings">
-            <HiAdjustmentsVertical />
+            <GrSettingsOption />
+
             <span>Settings</span>
           </StyledNavLink>
         </li>
