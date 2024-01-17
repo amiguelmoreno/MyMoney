@@ -7,10 +7,10 @@ function AddTransaction() {
   return (
     <div>
       <Modal>
-        <Modal.Open opens="cabin-form">
+        <Modal.Open opens="add-transaction">
           <ButtonWithIcon icon={<HiMiniPlus />}>New transaction</ButtonWithIcon>
         </Modal.Open>
-        <Modal.Window name="cabin-form">
+        <Modal.Window name="add-transaction">
           <CreateTransactionForm type="create" />
         </Modal.Window>
       </Modal>

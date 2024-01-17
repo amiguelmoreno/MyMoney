@@ -1,6 +1,17 @@
 import { generateUniqueID } from "../src/utils/helpers";
 import supabase from "./supabase";
 
+export async function getTransactions() {
+  const { data, error } = await supabase.from("transactions").select("*");
+
+  if (error) {
+    console.error(error);
+    throw new Error("Transactions could not be loaded");
+  }
+
+  return data;
+}
+
 export async function createTransaction(newTransaction) {
   let query = supabase.from("transactions");
 
@@ -11,17 +22,6 @@ export async function createTransaction(newTransaction) {
   if (error) {
     console.error(error);
     throw new Error("Transaction could not be created");
-  }
-
-  return data;
-}
-
-export async function getTransactions() {
-  const { data, error } = await supabase.from("transactions").select("*");
-
-  if (error) {
-    console.error(error);
-    throw new Error("Transactions could not be loaded");
   }
 
   return data;
