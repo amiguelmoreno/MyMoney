@@ -40,6 +40,15 @@ const StyledRow = styled(CommonRow)`
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
   }
+
+  background-color: #f49999;
+
+  background-color: ${(props) =>
+    props.type === "income"
+      ? "var(--color-brand-100)"
+      : props.type === "expense"
+      ? "#f49999;"
+      : "inherit"};
 `;
 
 const StyledBody = styled.section`
@@ -84,10 +93,10 @@ function Header({ children }) {
   );
 }
 
-function Row({ children }) {
+function Row({ children, type }) {
   const { columns } = useContext(TableContext);
   return (
-    <StyledRow role="row" columns={columns}>
+    <StyledRow role="row" columns={columns} type={type}>
       {children}
     </StyledRow>
   );

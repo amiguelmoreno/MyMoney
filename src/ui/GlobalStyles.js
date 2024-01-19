@@ -67,6 +67,7 @@ const GlobalStyles = createGlobalStyle`
 --color-indigo-700: #e0e7ff;
 
 --color-red-100: #fee2e2;
+--color-red-200: #fee2e2;
 --color-red-700: #b91c1c;
 --color-red-800: #991b1b;
 
@@ -80,6 +81,8 @@ const GlobalStyles = createGlobalStyle`
 --image-opacity: 90%;
   }
   
+  --color-red-100: #fee2e2;
+
   /* Indigo */
   --color-brand-50: #e0f2f1;
   --color-brand-100: #a0e8d0;
@@ -118,6 +121,7 @@ body {
   color: var(--color-grey-700);
 
   transition: color 0.3s, background-color 0.3s;
+  user-select: none;
   min-height: 100vh;
   line-height: 1.5;
   font-size: 1.6rem;

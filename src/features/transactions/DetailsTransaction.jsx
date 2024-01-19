@@ -7,10 +7,9 @@ function DetailsTransaction({ transaction }) {
     <>
       <Modal>
         <Modal.Open opens="details-transaction">
-          <li>
+          <div>
             <FaEye />
-            View Details
-          </li>
+          </div>
         </Modal.Open>
         <Modal.Window name="details-transaction">
           <Details transaction={transaction} />

@@ -8,21 +8,31 @@ import { useForm } from "react-hook-form";
 import Textarea from "../../ui/Textarea";
 import { useCreateTransaction } from "./useCreateTransaction";
 import { useDeleteTransaction } from "./useDeleteTransaction";
+import { useWallets } from "../wallets/useWallets";
+import SpinnerMini from "../../ui/Spinner";
 
 function CreateTransactionForm({ onCloseModal, type, transaction }) {
   const { deleteTransaction } = useDeleteTransaction();
   const { createTransaction } = useCreateTransaction();
   const { register, reset, handleSubmit, formState } = useForm();
   const { errors } = formState;
+  const { isLoading, wallets } = useWallets();
 
-  function onSubmit(data) {
-    createTransaction(data);
+  async function onSubmit(data) {
+    data.account = data.account.toUpperCase();
+    if (data.type === "expense") data.amount = -data.amount;
 
-    if (transaction) deleteTransaction(transaction.id);
+    try {
+      createTransaction(data);
 
-    reset();
-    onCloseModal();
-    console.log(data);
+      if (transaction) deleteTransaction(transaction.id);
+
+      reset();
+      onCloseModal();
+      console.log(data);
+    } catch (error) {
+      console.error("Error creating transacction:", error.message);
+    }
   }
 
   return (
@@ -30,6 +40,19 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
       {type === "create" && <Heading>New transaction</Heading>}
       {type === "edit" && <Heading>Edit transaction</Heading>}
       <Form onSubmit={handleSubmit(onSubmit)}>
+        <FormRow label="Type" error={errors?.income?.message}>
+          <Select
+            type="text"
+            id="type"
+            defaultValue={transaction?.type || "income"}
+            {...register("type", {
+              required: "This field is required",
+            })}
+          >
+            <option value="income">💰 Income</option>
+            <option value="expense">💸 Expense</option>
+          </Select>
+        </FormRow>
         <FormRow label="Concept" error={errors?.concept?.message}>
           <Input
             type="text"
@@ -54,7 +77,7 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
               },
               min: {
                 value: 0.01,
-                message: "Capacity should be at least 0.01",
+                message: "Amount should be at least 0.01",
               },
             })}
           />
@@ -64,50 +87,34 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
           <Input
             type="date"
             id="date"
-            defaultValue={transaction?.date || "2021-10-12"}
+            defaultValue={transaction?.date || "2024-01-12"}
             {...register("date", {
               required: "This field is required",
             })}
           />
         </FormRow>
 
-        <FormRow label="To" error={errors?.to?.message}>
-          <Input
-            type="text"
-            id="to"
-            defaultValue="Juanca"
-            {...register("to", {
-              required: "This field is required",
-            })}
-          />
-        </FormRow>
-
-        <FormRow label="From" error={errors?.from?.message}>
-          <Input
-            type="text"
-            id="from"
-            defaultValue={transaction?.from || "Migue"}
-            {...register("from", {
-              required: "This field is required",
-            })}
-          />
-        </FormRow>
-
-        <FormRow label="Account" error={errors?.account?.message}>
-          <Select
-            type="text"
-            id="account"
-            defaultValue={transaction?.account || "BBVA"}
-            {...register("account", {
-              required: "This field is required",
-            })}
-          >
-            <option value="BBVA">BBVA</option>
-            <option value="ING">ING</option>
-            <option value="CAIXA">CAIXA</option>
-            <option value="SANTANDER">SANTANDER</option>
-          </Select>
-        </FormRow>
+        {isLoading ? (
+          <SpinnerMini></SpinnerMini>
+        ) : (
+          <FormRow label="Account" error={errors?.account?.message}>
+            <Select
+              type="text"
+              id="account"
+              defaultValue={transaction?.account}
+              {...register("account", {
+                required:
+                  "This field is required. If you don't have a wallet create one",
+              })}
+            >
+              {wallets?.map((wallet) => (
+                <option value={wallet.name.toLowerCase()} key={wallet.id}>
+                  {wallet.name}
+                </option>
+              ))}
+            </Select>
+          </FormRow>
+        )}
 
         <FormRow
           label="Transaction details"
@@ -125,14 +132,13 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
           <Select
             type="text"
             id="status"
-            defaultValue={transaction?.status || "received"}
+            defaultValue={transaction?.status || "finished"}
             {...register("status", {
               required: "This field is required",
             })}
           >
-            <option value="received">✅ Received</option>
+            <option value="completed">✅ Completed</option>
             <option value="pending">🟠 Pending</option>
-            <option value="sent">💸 Sent</option>
           </Select>
         </FormRow>
 

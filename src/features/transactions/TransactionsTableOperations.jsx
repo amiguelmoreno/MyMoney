@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import FilterDrop from "../../ui/FilterDrop";
 import SortBy from "../../ui/SortBy";
+import { useWallets } from "../wallets/useWallets";
+import { is } from "date-fns/locale";
 
 const StyledFiltersContainer = styled.div`
   display: flex;
@@ -8,14 +10,38 @@ const StyledFiltersContainer = styled.div`
   border-radius: 10px;
 
   select {
-    background-color: var(--color-brand-600);
-    color: white;
+    background-color: var(--color-grey-200);
+    color: #15161f;
   }
 `;
 
 function TransactionsTableOperations() {
+  const { isLoading, wallets } = useWallets();
+
   return (
     <StyledFiltersContainer>
+      <FilterDrop
+        filterField="type"
+        options={[
+          { value: "all", label: "All types" },
+          { value: "income", label: "💰 Income " },
+          { value: "expense", label: "💸 Expense" },
+        ]}
+      />
+
+      {!isLoading && (
+        <FilterDrop
+          filterField="account"
+          options={[
+            { value: "all", label: "All wallets" },
+            ...wallets.map((wallet) => ({
+              value: wallet.name.toLowerCase(),
+              label: wallet.name.toUpperCase(),
+            })),
+          ]}
+        />
+      )}
+
       <FilterDrop
         filterField="status"
         options={[
@@ -45,12 +71,13 @@ function TransactionsTableOperations() {
           { value: "transportation", label: "🚗 Transportation" },
           { value: "health", label: "🏥 Health" },
           { value: "entertainment", label: "🎬 Entertainment" },
+          { value: "gym", label: "🏋🏻 Gym" },
           { value: "education", label: "📚 Education" },
-          { value: "clothing", label: "👕 Clothing and Accessories" },
-          { value: "travel", label: "✈️ Travel and Vacations" },
+          { value: "clothing", label: "👕 Clothes" },
+          { value: "travel", label: "✈️ Travels" },
           { value: "technology", label: "🔌 Technology" },
-          { value: "debt", label: "💳 Debts and Loans" },
-          { value: "gifts", label: "🎁 Gifts and Donations" },
+          { value: "debt", label: "💳 Debts" },
+          { value: "gifts", label: "🎁 Gifts" },
         ]}
       ></FilterDrop>
       <SortBy

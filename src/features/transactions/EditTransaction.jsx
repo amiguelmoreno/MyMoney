@@ -7,10 +7,9 @@ function EditTransaction({ transaction }) {
     <>
       <Modal>
         <Modal.Open opens="edit-transaction">
-          <li>
+          <div>
             <FaPencilAlt />
-            Edit
-          </li>
+          </div>
         </Modal.Open>
         <Modal.Window name="edit-transaction">
           <CreateTransactionForm type="edit" transaction={transaction} />

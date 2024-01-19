@@ -46,6 +46,22 @@ function TransactionTable() {
     );
   }
 
+  //filter account
+  const filterAccountValue = searchParams.get("account") || "all";
+  if (filterAccountValue !== "all") {
+    filteredTransactions = filteredTransactions.filter(
+      (transaction) => transaction.account === filterAccountValue.toUpperCase()
+    );
+  }
+
+  //filter type
+  const filterTypeValue = searchParams.get("type") || "all";
+  if (filterTypeValue !== "all") {
+    filteredTransactions = filteredTransactions.filter(
+      (transaction) => transaction.type === filterTypeValue
+    );
+  }
+
   // sort
   const sortBy = searchParams.get("sortBy") || "date-desc";
   const [field, direction] = sortBy.split("-");
@@ -64,13 +80,11 @@ function TransactionTable() {
   });
 
   return (
-    <Table columns="2fr 1fr 1fr 1fr 1fr 1fr 1fr 0.8fr 0.5fr">
+    <Table columns="2fr 1fr 1fr 1fr  1fr 0.8fr 1.4fr">
       <Table.Header>
-        <div>Concept</div>
         <div>Amount</div>
+        <div>Concept</div>
         <div>Date</div>
-        <div>To</div>
-        <div>From</div>
         <div>Account</div>
         <div>Category</div>
         <div>Status</div>

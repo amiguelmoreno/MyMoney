@@ -1,5 +1,17 @@
+import Heading from "../ui/Heading";
+import Row from "../ui/Row";
+
 function Dashboard() {
-  return <>dash</>;
+  return (
+    <>
+      <Row type="horizontal">
+        <Heading as="h1">Dashboard</Heading>
+      </Row>
+      <Row>
+        <DashTables></DashTables>
+      </Row>
+    </>
+  );
 }
 
 export default Dashboard;

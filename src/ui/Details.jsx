@@ -51,20 +51,6 @@ const Date = styled.div`
   grid-column: 1/2;
   font-weight: 600;
 `;
-const FromTo = styled.div`
-  grid-column: 2/8;
-  justify-self: center;
-  display: flex;
-  align-items: self-start;
-  font-size: 1.7rem;
-  justify-content: center;
-
-  span {
-    margin: 0 0.5rem;
-    font-weight: 500;
-    font-size: 2.2rem;
-  }
-`;
 
 function Details({ transaction }) {
   console.log(transaction);
@@ -74,8 +60,8 @@ function Details({ transaction }) {
         <Title>{transaction.concept}</Title>
         <Status>
           <p>{transaction.status}</p>
-          {transaction.status === "sent" && <span>💸</span>}
-          {transaction.status === "received" && <span>✅</span>}
+
+          {transaction.status === "completed" && <span>✅</span>}
           {transaction.status === "pending" && <span>🟠</span>}
         </Status>
         <Account>
@@ -92,12 +78,7 @@ function Details({ transaction }) {
           </Description>
         )}
         <Date>{transaction.date}</Date>
-        <FromTo>
-          <p>
-            from <span>{transaction.from}</span> to{" "}
-            <span>{transaction.to}</span>
-          </p>
-        </FromTo>
+
         <Amount>{formatCurrency(transaction.amount)}</Amount>
       </DetailsCard>
     </>

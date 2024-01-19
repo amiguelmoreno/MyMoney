@@ -7,12 +7,10 @@ import TransactionMenu from "./TransactionMenu";
 
 function TransactionRow({ transaction }) {
   return (
-    <Table.Row>
-      <div>{transaction.concept}</div>
+    <Table.Row type={transaction.type}>
       <div>{formatCurrency(transaction.amount)}</div>
+      <div>{transaction.concept}</div>
       <div>{transaction.date}</div>
-      <div>{transaction.to}</div>
-      <div>{transaction.from}</div>
       <div>{transaction.account}</div>
       <div>{transaction.category}</div>
       <div>{transaction.status}</div>
@@ -24,8 +22,3 @@ function TransactionRow({ transaction }) {
 }
 
 export default TransactionRow;
-
-{
-  /* ;
-   */
-}
