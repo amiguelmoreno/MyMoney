@@ -80,7 +80,7 @@ function TransactionTable() {
   });
 
   return (
-    <Table columns="2fr 1fr 1fr 1fr  1fr 0.8fr 1.4fr">
+    <Table columns="1fr 2fr 1fr 1fr  1fr 0.8fr 1.4fr">
       <Table.Header>
         <div>Amount</div>
         <div>Concept</div>

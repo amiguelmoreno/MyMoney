@@ -17,6 +17,9 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
   const { register, reset, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { isLoading, wallets } = useWallets();
+  const currentDate = new Date().toISOString().split("T")[0];
+
+  console.log(type);
 
   async function onSubmit(data) {
     data.account = data.account.toUpperCase();
@@ -68,7 +71,9 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
           <Input
             type="text"
             id="amount"
-            defaultValue={transaction?.amount || 4}
+            defaultValue={
+              type === "edit" ? -transaction?.amount : transaction?.amount || 4
+            }
             {...register("amount", {
               required: "This field is required",
               pattern: {
@@ -87,6 +92,7 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
           <Input
             type="date"
             id="date"
+            max={currentDate}
             defaultValue={transaction?.date || "2024-01-12"}
             {...register("date", {
               required: "This field is required",
@@ -157,11 +163,11 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
             <option value="health">🏥 Health</option>
             <option value="entertainment">🎬 Entertainment</option>
             <option value="education">📚 Education</option>
-            <option value="clothing">👕 Clothing and Accessories</option>
-            <option value="travel">✈️ Travel and Vacations</option>
+            <option value="clothing">👕 Clothing</option>
+            <option value="travels">✈️ Travels</option>
             <option value="technology">🔌 Technology</option>
-            <option value="debt">💳 Debts and Loans</option>
-            <option value="gifts">🎁 Gifts and Donations</option>
+            <option value="debts">💳 Debts</option>
+            <option value="gifts">🎁 Gifts</option>
           </Select>
         </FormRow>
 

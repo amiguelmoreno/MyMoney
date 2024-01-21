@@ -47,8 +47,7 @@ function TransactionsTableOperations() {
         options={[
           { value: "all", label: "All Status" },
           { value: "pending", label: "🟠 Pending" },
-          { value: "received", label: "✅ Received" },
-          { value: "sent", label: "💸 Sent" },
+          { value: "completed", label: "✅ Completed" },
         ]}
       />
       <FilterDrop
@@ -74,9 +73,9 @@ function TransactionsTableOperations() {
           { value: "gym", label: "🏋🏻 Gym" },
           { value: "education", label: "📚 Education" },
           { value: "clothing", label: "👕 Clothes" },
-          { value: "travel", label: "✈️ Travels" },
+          { value: "travels", label: "✈️ Travels" },
           { value: "technology", label: "🔌 Technology" },
-          { value: "debt", label: "💳 Debts" },
+          { value: "debts", label: "💳 Debts" },
           { value: "gifts", label: "🎁 Gifts" },
         ]}
       ></FilterDrop>

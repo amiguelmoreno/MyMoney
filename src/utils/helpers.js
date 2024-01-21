@@ -21,3 +21,25 @@ export function filterTransactionsByMonth(transactions) {
 export function generateUniqueID() {
   return Date.now().toString();
 }
+
+export function formatDateDifference(dateString) {
+  const transactionDate = new Date(dateString);
+  const currentDate = new Date();
+
+  const differenceInMilliseconds = currentDate - transactionDate;
+  const differenceInDays = Math.floor(
+    differenceInMilliseconds / (24 * 60 * 60 * 1000)
+  );
+
+  if (differenceInDays === 0) {
+    return "Today";
+  } else if (differenceInDays === 1) {
+    return "Yesterday";
+  } else {
+    return `${differenceInDays} days ago`;
+  }
+}
+
+export function arraysEqual(arr1, arr2) {
+  return JSON.stringify(arr1) === JSON.stringify(arr2);
+}

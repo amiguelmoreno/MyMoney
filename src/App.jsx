@@ -9,6 +9,7 @@ import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import { TransactionProvider } from "./features/dashboard/DashboardTransactionsContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +32,14 @@ function App() {
                 index
                 element={<Navigate replace to="dashboard" />}
               ></Route>
-              <Route path="dashboard" element={<Dashboard />}></Route>
+              <Route
+                path="dashboard"
+                element={
+                  <TransactionProvider>
+                    <Dashboard />
+                  </TransactionProvider>
+                }
+              ></Route>
               <Route path="transactions" element={<Transactions />}></Route>
               <Route path="wallets" element={<Wallets />}></Route>
               <Route path="settings" element={<Settings />}></Route>
@@ -46,7 +54,7 @@ function App() {
           gutter={12}
           containerStyle={{ margin: "8px" }}
           toastOptions={{
-            success: { duration: 3000 },
+            success: { duration: 2000 },
             error: { duration: 5000 },
             style: {
               fontSize: "16px",

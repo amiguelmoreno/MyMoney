@@ -9,7 +9,6 @@ export function useDeleteTransaction() {
     mutationFn: deleteTransactionApi,
     onSuccess: () => {
       toast.success("Transaction successfully deleted");
-      console.log("transaction deleted");
 
       queryClient.invalidateQueries({
         queryKey: ["transactions"],

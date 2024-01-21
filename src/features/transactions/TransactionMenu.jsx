@@ -23,7 +23,7 @@ const StyledTransactionMenu = styled.div`
     transition: all 0.3s;
 
     &:hover {
-      background-color: var(--color-brand-700);
+      background-color: var(--color-grey-700);
       color: white;
     }
   }
