@@ -17,7 +17,7 @@
   </a>
     <br />
     <br />
-    <a href="https://amiguelmoreno.github.io/MagicHome/"><strong>Let's have a look! »</strong></a>
+    <a href="https://mymoneyio.netlify.app/"><strong>Let's have a look! »</strong></a>
     <br />
     <br />
   </p>
@@ -99,12 +99,11 @@ Don't forget to give the project a star! Thanks again!
 
 [![LinkedIn][linkedin-shield]][linkedin-url] 
 
-Project Link: https://magichome.netlify.app/
+Project Link: https://mymoneyio.netlify.app/
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/miguelmoreno00/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
+
