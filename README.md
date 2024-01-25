@@ -13,7 +13,7 @@
      <br />
      <br />
   <a href="#">
-    <img src="https://skillicons.dev/icons?i=html,css,sass,js" />
+    <img src="https://skillicons.dev/icons?i=html,styledcomponents,react,vite" />
   </a>
     <br />
     <br />
