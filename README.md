@@ -6,10 +6,10 @@
   </a>
   <br />
   <br />
-  <h1>Magic Home</h1>
+  <h1>MyMoney</h1>
   <br />
   <p align="center">
-    Full Responsive Landing Page build with <img src="https://img.shields.io/badge/-HTML5-orange" alt="Logo">,  <img src="https://img.shields.io/badge/-CSS3-blue" alt="Logo"> using <img src="https://img.shields.io/badge/-SASS-ff69b4" alt="Logo"> and <img src="https://img.shields.io/badge/-JS-yellow" alt="Logo">
+    Small App to have track of your expenses and incomes using React.
      <br />
      <br />
   <a href="#">
@@ -42,54 +42,40 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The main goal of this proyect is to use almost everything I have learnt about <img src="https://img.shields.io/badge/-HTML5-orange" alt="Logo"> and <img src="https://img.shields.io/badge/-CSS3-blue" alt="Logo"> and some <img src="https://img.shields.io/badge/-JS-yellow" alt="Logo"> fundamentals. This is a improved version of a project that I did in Jonas Schmedtmann course.
+The main goal of this proyect is to use almost everything I have learnt about React, using a lot of main functionalities of React, Supabase and more.
 <br />
 <br />
 ### What did I used to get the best of this project?
 
-  * Best Practices:
-    * BEM method to name classes in CSS and HTML  
-    * Keep It Organized
-    * Make It Understandable
-  
-  * <img src="https://img.shields.io/badge/-SASS-ff69b4" alt="Logo"> as a CSS pre-processor. Which offer:
-    * Efficient syntax
-    * Readable styles files
-    * Reusable components (@mixins and @extends)
-  
-  * <img src="https://img.shields.io/badge/-CSS3-blue" alt="Logo"> features:
-    * Flexbox 
-    * Grid
-    * Animations
-    * Variables
-    * Pseudo-elements
-    * Pseudo-classes
-    * Media Queries
-
-  * <img src="https://img.shields.io/badge/-JS-yellow" alt="Logo"> most used methods:
-    * querySelector(), querySelectorAll()
-    * toggle()
-    * forEach()
-    * addEventListener()
-    * insertAdjacentHTML()
-    * contains()
+  * React-router-dom
+  * React-Query
+  * Organized and clean code
+  * Reusable components (Modal, Butttons, Inputs...)
+  * Hooks
+  * React-hook-form
+  * ContextApi
+  * Framer-motion
 
 
 ### What interesting components can I find?
     
-   * PRO Navigation Bar, that converts itself into a floating menu on smaller devices
+   * Dashboard with visual graphics
+     
+   * List of transactions with a PRO Filter
     
-   * Testimonials Slider
+   * Dark Mode
     
-   * Modal Window Form
-
 
 ## Posible extra features and improvements
 
 Some features I would like to add are:
 
+ * Notifications when a certain limit of expenses or incomes is reached
+ * Login (I didn't do it to let people see the project without login)
+ * Functionalitu to download a PDF with the main info you want. 
  * Compress the size of the images reducing them to the maximum size used in the page
  * Use diferent size images for each media query to improve performance
+
 
 
 <!-- CONTRIBUTING -->
