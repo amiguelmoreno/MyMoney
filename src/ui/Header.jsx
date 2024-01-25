@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import DarkModeButton from "../features/settings/DarkModeButton";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -12,7 +13,11 @@ const StyledHeader = styled.header`
 `;
 
 function Header() {
-  return <StyledHeader>header</StyledHeader>;
+  return (
+    <StyledHeader>
+      <DarkModeButton></DarkModeButton>
+    </StyledHeader>
+  );
 }
 
 export default Header;

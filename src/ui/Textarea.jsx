@@ -8,6 +8,8 @@ const Textarea = styled.textarea`
   box-shadow: var(--shadow-sm);
   width: 100%;
   height: 8rem;
+  overflow: hidden; /* O el valor deseado, como scroll o hidden */
+  resize: none;
 `;
 
 export default Textarea;

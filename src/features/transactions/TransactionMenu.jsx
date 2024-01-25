@@ -18,6 +18,7 @@ const StyledTransactionMenu = styled.div`
     padding: 0.5rem;
     line-height: 0;
     border-radius: 5px;
+    color: var(--color-grey-700);
     background-color: var(--color-grey-100);
     border: none;
     transition: all 0.3s;

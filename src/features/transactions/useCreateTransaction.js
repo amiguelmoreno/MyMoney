@@ -8,7 +8,7 @@ export function useCreateTransaction() {
   const { isLoading: isCreating, mutate: createTransaction } = useMutation({
     mutationFn: createTransactionApi,
     onSuccess: () => {
-      toast.success("New transaction successfully created");
+      toast.success("New transaction created");
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: (err) => toast.error(err.message),

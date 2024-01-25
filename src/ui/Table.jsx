@@ -32,9 +32,10 @@ const StyledHeader = styled(CommonRow)`
 
 const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
-  display: flex;
-  justify-content: space-around;
+
+  justify-content: start;
   white-space: nowrap;
+  color: white;
 
   span {
     font-size: 2rem;
@@ -50,9 +51,9 @@ const StyledRow = styled(CommonRow)`
 
   background-color: ${(props) =>
     props.type === "income"
-      ? "var(--color-brand-100)"
+      ? "var(--color-brand-600)"
       : props.type === "expense"
-      ? "#f49999;"
+      ? "var(--color-red-600)"
       : "inherit"};
 `;
 

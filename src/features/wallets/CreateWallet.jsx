@@ -12,7 +12,7 @@ const NewWallet = styled.div`
   justify-content: center;
   border: 5px solid var(--color-grey-300);
   padding: 2rem 3rem;
-  background-color: var(--color-grey-200);
+  background-color: var(--color-grey-100);
   gap: 1rem;
   border-radius: 10px;
   font-size: 2.7rem;

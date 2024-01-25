@@ -56,6 +56,10 @@ function CreateWalletForm({ onCloseModal, wallet }) {
                 value: 0.0,
                 message: "Minimum amount should be at least 0.00",
               },
+              max: {
+                value: 50000,
+                message: "Maximum amount is 50000",
+              },
             })}
           />
         </FormRow>

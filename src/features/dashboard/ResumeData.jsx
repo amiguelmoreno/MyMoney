@@ -13,7 +13,7 @@ const StyledListaConEstilo = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-
+  margin-left: 2rem;
   gap: 1rem;
   font-size: 1.6rem;
   font-weight: 400;

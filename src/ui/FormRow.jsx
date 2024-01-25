@@ -39,9 +39,9 @@ const Error = styled.span`
   padding: 0 1rem;
   right: 0;
   bottom: -1.2rem;
-  background-color: var(--color-red-700);
+  background-color: var(--color-red-600);
   font-size: 1.4rem;
-  color: var(--color-grey-0);
+  color: white;
 `;
 
 function FormRow({ label, error, children }) {

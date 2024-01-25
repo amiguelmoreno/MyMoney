@@ -18,7 +18,7 @@ const Wallet = styled.div`
   justify-content: center;
   border: 5px solid var(--color-brand-700);
   padding: 2rem 3rem;
-  background-color: var(--color-grey-200);
+  background-color: var(--color-grey-100);
   gap: 1rem;
   row-gap: 2rem;
   border-radius: 10px;
@@ -66,7 +66,7 @@ const DropdownMenu = styled.div`
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: white;
+  background-color: var(--color-grey-100);
   border: 1px solid var(--color-grey-300);
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

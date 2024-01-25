@@ -26,20 +26,17 @@ const GlobalStyles = createGlobalStyle`
   --color-silver-700: #374151;
   --color-indigo-100: #e0e7ff;
   --color-indigo-700: #4338ca;
+ 
+  --color-red-600: #f9376e;
 
-  --color-red-100: #fee2e2;
-  --color-red-700: #b91c1c;
-  --color-red-800: #991b1b;
-
-  --backdrop-color: rgba(255, 255, 255, 0.1);
-
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
-  
-
-    --image-grayscale: 0;
-  --image-opacity: 100%;
+  --color-brand-50: #e0f2f1;
+  --color-brand-100: #a0e8d0;
+  --color-brand-200: #68d9b3;
+  --color-brand-500: #44c79b;
+  --color-brand-600: #37a37f;
+  --color-brand-700: #228a67;
+  --color-brand-800: #126b4d;
+  --color-brand-900: #064a33;
   }
   
   &.dark-mode {
@@ -66,32 +63,31 @@ const GlobalStyles = createGlobalStyle`
 --color-indigo-100: #3730a3;
 --color-indigo-700: #e0e7ff;
 
---color-red-100: #fee2e2;
---color-red-200: #fee2e2;
---color-red-700: #b91c1c;
---color-red-800: #991b1b;
+  --color-red-600: #f9376e;
 
---backdrop-color: rgba(0, 0, 0, 0.3);
-
---shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
---shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
---shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
-
---image-grayscale: 10%;
---image-opacity: 90%;
+  --color-brand-900: #e0f2f1;
+--color-brand-800: #a0e8d0;
+--color-brand-700: #68d9b3;
+--color-brand-600: #44c79b;
+--color-brand-500: #37a37f;
+--color-brand-200: #228a67;
+--color-brand-100: #126b4d;
+--color-brand-50: #064a33;
   }
   
-  --color-red-100: #fee2e2;
+  
+
+  --color-grey: #111827;
 
   /* Indigo */
-  --color-brand-50: #e0f2f1;
+/*   --color-brand-50: #e0f2f1;
   --color-brand-100: #a0e8d0;
   --color-brand-200: #68d9b3;
   --color-brand-500: #44c79b;
   --color-brand-600: #37a37f;
   --color-brand-700: #228a67;
   --color-brand-800: #126b4d;
-  --color-brand-900: #064a33;
+  --color-brand-900: #064a33; */
 
   --border-radius-tiny: 3px;
   --border-radius-sm: 5px;
@@ -118,7 +114,7 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-color: var(--color-grey-700);  
+  color: var(--color-grey-700);  
 
   transition: color 0.3s, background-color 0.3s;
   user-select: none;
@@ -153,7 +149,7 @@ input:focus,
 button:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid var(--color-brand-600);
+  outline: 2px solid var(--color-grey-700);
   outline-offset: -1px;
 }
 

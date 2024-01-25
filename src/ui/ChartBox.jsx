@@ -15,8 +15,8 @@ const StyledChartBox = styled.div`
   ${(props) =>
     props.type === "cheese" &&
     css`
-      background-color: var(--color-grey-0);
-      border: 1px solid var(--color-grey-100);
+      background-color: var(--color-grey-100);
+      border: 1px solid var(--color-grey-200);
       border-radius: var(--border-radius-md);
       height: 60rem;
       padding: 4rem 2rem;

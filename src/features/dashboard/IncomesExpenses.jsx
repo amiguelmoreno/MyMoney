@@ -1,4 +1,3 @@
-import Heading from "../../ui/Heading";
 import {
   Cell,
   Legend,
@@ -32,7 +31,7 @@ const startData = [
   {
     type: "expense",
     value: 0,
-    color: "#f54747",
+    color: "var(--color-red-600)",
   },
 ];
 

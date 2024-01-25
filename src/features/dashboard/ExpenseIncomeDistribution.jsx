@@ -36,7 +36,7 @@ const startDataExpenses = [
   { name: "Clothing", value: 0, emoji: "👕", color: "#FF6347" },
   { name: "Travels", value: 0, emoji: "✈️", color: "#20B2AA" },
   { name: "Technology", value: 0, emoji: "🔌", color: "#7B68EE" },
-  { name: "Debts", value: 0, emoji: "💳", color: "#CD5C5C" },
+  { name: "Debts", value: 0, emoji: "💳", color: "var(--color-red-600)" },
   { name: "Gifts", value: 0, emoji: "🎁", color: "#32CD32" },
 ];
 
@@ -50,7 +50,7 @@ const startDataIncomes = [
   { name: "Clothing", value: 0, emoji: "👕", color: "#FF6347" },
   { name: "Travels", value: 0, emoji: "✈️", color: "#20B2AA" },
   { name: "Technology", value: 0, emoji: "🔌", color: "#7B68EE" },
-  { name: "Debts", value: 0, emoji: "💳", color: "#CD5C5C" },
+  { name: "Debts", value: 0, emoji: "💳", color: "var(--color-red-600)" },
   { name: "Gifts", value: 0, emoji: "🎁", color: "#32CD32" },
 ];
 
@@ -128,8 +128,6 @@ function ExpenseIncomeDistribution() {
 
   if (isLoading) return <Spinner></Spinner>;
 
-  if (transactions.length === 0) return <Empty resourceName="data"></Empty>;
-
   const dataExpenses = prepareData(startDataExpenses, transactions, "expense");
   const dataIncomes = prepareData(startDataIncomes, transactions, "income");
 
@@ -151,11 +149,10 @@ function ExpenseIncomeDistribution() {
                 labelLine={false}
                 label={renderCustomizedLabel}
                 outerRadius={110}
-                fill="#8884d8"
                 dataKey="value"
               >
                 {dataExpenses.map((entry, index) => (
-                  <Cell fill={entry.color} key={index} />
+                  <Cell fill={entry.color} key={index} stroke={entry.color} />
                 ))}
               </Pie>
               <Legend
@@ -185,11 +182,10 @@ function ExpenseIncomeDistribution() {
                 labelLine={false}
                 label={renderCustomizedLabel}
                 outerRadius={110}
-                fill="#8884d8"
                 dataKey="value"
               >
                 {dataIncomes.map((entry, index) => (
-                  <Cell fill={entry.color} key={index} />
+                  <Cell fill={entry.color} key={index} stroke={entry.color} />
                 ))}
               </Pie>
               <Legend

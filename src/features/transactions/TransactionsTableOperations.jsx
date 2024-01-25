@@ -8,11 +8,6 @@ const StyledFiltersContainer = styled.div`
   display: flex;
   gap: 0.6rem;
   border-radius: 10px;
-
-  select {
-    background-color: var(--color-grey-200);
-    color: #15161f;
-  }
 `;
 
 function TransactionsTableOperations() {

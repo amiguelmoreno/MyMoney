@@ -6,13 +6,12 @@ import ResumeData from "./ResumeData";
 const StyledGlobalResume = styled.div`
   grid-column: 1/3;
   display: grid;
-
   grid-template-columns: 1fr 1fr;
-  background-color: white;
   column-gap: 3rem;
   padding: 2rem;
   border-radius: 5px;
-  border: 1px solid var(--color-grey-100);
+  background-color: var(--color-grey-100);
+  border: 1px solid var(--color-grey-200);
 `;
 
 function GlobalResume() {

@@ -5,34 +5,58 @@ import Button from "../../ui/Button";
 import Select from "../../ui/SelectForm";
 import Heading from "../../ui/Heading";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import Textarea from "../../ui/Textarea";
 import { useCreateTransaction } from "./useCreateTransaction";
 import { useDeleteTransaction } from "./useDeleteTransaction";
+//import { useUpdateTransaction } from "./useUpdateTransaction";
 import { useWallets } from "../wallets/useWallets";
 import SpinnerMini from "../../ui/Spinner";
+import { updateTransaction } from "../../../services/apiTransactions.js";
 
 function CreateTransactionForm({ onCloseModal, type, transaction }) {
   const { deleteTransaction } = useDeleteTransaction();
   const { createTransaction } = useCreateTransaction();
+  //const { updateTransaction } = useUpdateTransaction();
   const { register, reset, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { isLoading, wallets } = useWallets();
   const currentDate = new Date().toISOString().split("T")[0];
-
-  console.log(type);
 
   async function onSubmit(data) {
     data.account = data.account.toUpperCase();
     if (data.type === "expense") data.amount = -data.amount;
 
     try {
-      createTransaction(data);
+      if (!transaction) createTransaction(data);
 
-      if (transaction) deleteTransaction(transaction.id);
+      if (transaction) {
+        // check si transaction amount, account, category, concept, date, description, status, type
+        console.log(data.amount);
+        console.log(transaction.amount);
+
+        if (
+          data.amount === transaction.amount &&
+          data.account === transaction.account &&
+          data.category === transaction.category &&
+          data.concept === transaction.concept &&
+          data.date === transaction.date &&
+          data.description === transaction.description &&
+          data.status === transaction.status &&
+          data.type === transaction.type
+        ) {
+          toast.success("Transaction edited");
+        } else {
+          console.log(`this is the data sended`, data);
+
+          updateTransaction(transaction.id, data);
+          /* createTransaction(data);
+          deleteTransaction(transaction.id); */
+        }
+      }
 
       reset();
       onCloseModal();
-      console.log(data);
     } catch (error) {
       console.error("Error creating transacction:", error.message);
     }
@@ -72,7 +96,9 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
             type="text"
             id="amount"
             defaultValue={
-              type === "edit" ? -transaction?.amount : transaction?.amount || 4
+              transaction?.amount < 0
+                ? -transaction?.amount
+                : transaction?.amount || 4
             }
             {...register("amount", {
               required: "This field is required",
@@ -83,6 +109,10 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
               min: {
                 value: 0.01,
                 message: "Amount should be at least 0.01",
+              },
+              max: {
+                value: 50000,
+                message: "Maximum amount is 50000",
               },
             })}
           />
@@ -130,7 +160,12 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
             type="number"
             id="description"
             placeholder="Some details about the transaction..."
-            {...register("description", {})}
+            {...register("description", {
+              maxLength: {
+                value: 150, // Establece el límite máximo de caracteres según tus necesidades
+                message: "Maximum 10 characters",
+              },
+            })}
           />
         </FormRow>
 
@@ -168,6 +203,7 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
             <option value="technology">🔌 Technology</option>
             <option value="debts">💳 Debts</option>
             <option value="gifts">🎁 Gifts</option>
+            <option value="gym">🏋🏻 Gym</option>
           </Select>
         </FormRow>
 
