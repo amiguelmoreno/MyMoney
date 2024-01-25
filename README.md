@@ -72,7 +72,7 @@ Some features I would like to add are:
 
  * Notifications when a certain limit of expenses or incomes is reached
  * Login (I didn't do it to let people see the project without login)
- * Functionalitu to download a PDF with the main info you want. 
+ * Functionality to download a PDF with the main info you want. 
  * Compress the size of the images reducing them to the maximum size used in the page
  * Use diferent size images for each media query to improve performance
 
