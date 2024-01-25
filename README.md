@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://amiguelmoreno.github.io/MagicHome/">
-    <img src="img/logo.png" alt="Logo" width="180">
+    <img src="public/mymoney.png" alt="Logo" width="180">
   </a>
   <br />
   <br />
