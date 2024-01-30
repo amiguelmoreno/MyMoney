@@ -3,13 +3,17 @@ import styled, { css } from "styled-components";
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
-  gap: 1rem;
+  overflow: hidden;
+  font-size: 1.3rem;
+
+  @media (width <= 850px) {
+    font-size: 1.1rem;
+  }
 
   ${(props) =>
     props.type === "regular" &&
     css`
-      padding: 2.4rem 4rem;
+      padding: 2rem;
 
       /* Box */
       background-color: var(--color-grey-0);
@@ -21,9 +25,6 @@ const Form = styled.form`
     css`
       width: 80rem;
     `}
-    
-  overflow: hidden;
-  font-size: 1.4rem;
 `;
 
 Form.defaultProps = {

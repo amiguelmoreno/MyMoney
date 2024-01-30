@@ -14,6 +14,12 @@ const ToggleContainer = styled.button`
   border: 3px solid ${({ theme }) => theme.bg};
   font-size: 0.5rem;
 
+  @media (width <= 850px) {
+    position: absolute;
+    left: 0;
+    transform: scale(0.8);
+  }
+
   overflow: hidden;
   cursor: pointer;
   outline: none;

@@ -8,16 +8,16 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Textarea from "../../ui/Textarea";
 import { useCreateTransaction } from "./useCreateTransaction";
-import { useDeleteTransaction } from "./useDeleteTransaction";
-//import { useUpdateTransaction } from "./useUpdateTransaction";
+//import { useDeleteTransaction } from "./useDeleteTransaction";
+import { useUpdateTransaction } from "./useUpdateTransaction";
 import { useWallets } from "../wallets/useWallets";
 import SpinnerMini from "../../ui/Spinner";
-import { updateTransaction } from "../../../services/apiTransactions.js";
+//import { updateTransaction } from "../../../services/apiTransactions.js";
 
 function CreateTransactionForm({ onCloseModal, type, transaction }) {
-  const { deleteTransaction } = useDeleteTransaction();
+  //const { deleteTransaction } = useDeleteTransaction();
   const { createTransaction } = useCreateTransaction();
-  //const { updateTransaction } = useUpdateTransaction();
+  const { updateTransaction } = useUpdateTransaction();
   const { register, reset, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { isLoading, wallets } = useWallets();
@@ -49,9 +49,7 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
         } else {
           console.log(`this is the data sended`, data);
 
-          updateTransaction(transaction.id, data);
-          /* createTransaction(data);
-          deleteTransaction(transaction.id); */
+          updateTransaction({ id: transaction.id, data });
         }
       }
 
@@ -87,6 +85,10 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
             defaultValue={transaction?.concept || "b"}
             {...register("concept", {
               required: "This field is required",
+              maxLength: {
+                value: 15, // Establece el límite máximo de caracteres según tus necesidades
+                message: "Maximum 15 characters",
+              },
             })}
           />
         </FormRow>
@@ -163,7 +165,7 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
             {...register("description", {
               maxLength: {
                 value: 150, // Establece el límite máximo de caracteres según tus necesidades
-                message: "Maximum 10 characters",
+                message: "Maximum 150 characters",
               },
             })}
           />

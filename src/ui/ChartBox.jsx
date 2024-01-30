@@ -5,12 +5,13 @@ const StyledChartBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 45rem;
 
   /* Box */
 
-  & .recharts-pie-label-text {
+  /* & .recharts-pie-label-text {
     font-weight: 600;
-  }
+  } */
 
   ${(props) =>
     props.type === "cheese" &&
@@ -18,15 +19,17 @@ const StyledChartBox = styled.div`
       background-color: var(--color-grey-100);
       border: 1px solid var(--color-grey-200);
       border-radius: var(--border-radius-md);
-      height: 60rem;
       padding: 4rem 2rem;
-      margin-bottom: 5rem;
+
+      @media (width <= 850px) {
+        height: 70rem;
+      }
     `}
 
   ${(props) =>
     props.type === "ring" &&
     css`
-      height: 32rem;
+      height: 30rem;
     `}
 `;
 

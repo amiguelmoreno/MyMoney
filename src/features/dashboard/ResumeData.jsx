@@ -13,10 +13,14 @@ const StyledListaConEstilo = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-left: 2rem;
+  margin-left: 1rem;
   gap: 1rem;
   font-size: 1.6rem;
   font-weight: 400;
+
+  @media (width <= 1000px) {
+    justify-self: center;
+  }
 `;
 
 const StyledItemLista = styled.div`
@@ -43,7 +47,7 @@ const PuntosIntermedios = styled.span`
 const StyledValorDato = styled.span`
   text-align: right;
   white-space: nowrap;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 600;
 `;
 
@@ -101,7 +105,7 @@ function ResumeData() {
           <StyledDato>
             {info.nombre}
             <PuntosIntermedios />
-            {Array(30).fill(".")}
+            {Array(15).fill(".")}
           </StyledDato>
           <StyledValorDato>{`${info.valor}`}</StyledValorDato>
         </StyledItemLista>

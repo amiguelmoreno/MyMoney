@@ -4,8 +4,9 @@ import { FaPlus } from "react-icons/fa";
 import CreateWalletForm from "./CreateWalletForm";
 
 const NewWallet = styled.div`
-  min-width: 30rem;
-  min-height: 18rem;
+  min-width: 25rem;
+  max-width: 25rem;
+  min-height: 15rem;
   display: flex;
   flex-direction: column;
   align-items: center;

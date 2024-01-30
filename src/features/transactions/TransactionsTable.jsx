@@ -8,8 +8,11 @@ import {
   filterTransactionsByDate,
   filterTransactionsByMonth,
 } from "../../utils/helpers";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function TransactionTable() {
+  const [isTableMini, setIsTableMini] = useState(window.innerWidth <= 850);
   const { isLoading, transactions } = useTransactions();
   const [searchParams] = useSearchParams();
 
@@ -80,19 +83,33 @@ function TransactionTable() {
   });
 
   return (
-    <Table columns="1fr 2fr 1fr 1fr  1fr 0.8fr 1.4fr">
+    <Table
+      columns={
+        isTableMini ? "1.2fr 1fr 1fr " : "1fr 2fr 1fr 1fr  1fr 0.8fr 1.4fr"
+      }
+    >
       <Table.Header>
         <div>Amount</div>
-        <div>Concept</div>
         <div>Date</div>
-        <div>Account</div>
-        <div>Category</div>
-        <div>Status</div>
+        {isTableMini ? (
+          <></>
+        ) : (
+          <>
+            <div>Concept</div>
+            <div>Account</div>
+            <div>Category</div>
+            <div>Status</div>
+          </>
+        )}
       </Table.Header>
       <Table.Body
         data={sortedTransactions}
         render={(transaction) => (
-          <TransactionRow transaction={transaction} key={transaction.id} />
+          <TransactionRow
+            transaction={transaction}
+            key={transaction.id}
+            isTableMini={isTableMini}
+          />
         )}
       />
     </Table>

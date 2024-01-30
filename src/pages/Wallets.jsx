@@ -9,9 +9,9 @@ import WalletCard from "../features/wallets/WalletCard";
 import CreateWallet from "../features/wallets/CreateWallet";
 
 const WalletsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, min-content);
-  gap: 7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem;
 `;
 
 function Wallets() {

@@ -1,19 +1,23 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
-import Header from "./Header";
 
 const StyledAppLayout = styled.div`
   display: grid;
   grid-template-columns: 26rem 1fr;
-  grid-template-rows: auto 1fr;
+
   height: 100dvh;
+
+  @media (width <= 1050px) {
+    display: flex;
+  }
 `;
 
 const StyledMain = styled.main`
   background-color: var(--color-grey-50);
-  padding: 4rem 4.8rem 6.4rem;
+  padding: 4rem 4.8rem 12rem;
   overflow: scroll;
+  flex: 1;
 `;
 
 const StyledContainer = styled.div`
@@ -27,7 +31,6 @@ const StyledContainer = styled.div`
 function AppLayout() {
   return (
     <StyledAppLayout>
-      <Header></Header>
       <Sidebar></Sidebar>
       <StyledMain>
         <StyledContainer>

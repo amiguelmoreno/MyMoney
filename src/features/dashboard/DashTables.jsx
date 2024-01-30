@@ -4,7 +4,6 @@ import ExpenseIncomeDistribution from "./ExpenseIncomeDistribution";
 import GlobalResume from "./GlobalResume";
 
 const StyledTableContainer = styled.div`
-  height: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;

@@ -30,13 +30,29 @@ const StyledButtonWithIcon = styled.button`
     background-color: var(--color-brand-700);
     transition: all 0.5s;
   }
+
+  @media (width <= 1050px) {
+    div {
+      display: none;
+    }
+
+    span {
+      font-size: 3.5rem;
+    }
+  }
+
+  @media (width <= 600px) {
+    span {
+      font-size: 2.5rem;
+    }
+  }
 `;
 
 function ButtonWithIcon({ icon, children, onClick }) {
   return (
     <StyledButtonWithIcon onClick={onClick}>
       <span>{icon}</span>
-      {children}
+      <div>{children}</div>
     </StyledButtonWithIcon>
   );
 }

@@ -20,6 +20,7 @@ const PieDescription = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   font-weight: 500;
+  white-space: nowrap;
 `;
 
 const startData = [
@@ -81,7 +82,7 @@ function IncomesExpenses() {
             nameKey="type"
             dataKey="value"
             innerRadius={90}
-            outerRadius={135}
+            outerRadius={120}
             cx="50%"
             cy="50%"
             paddingAngle={2}

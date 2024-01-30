@@ -5,16 +5,30 @@ import { useWallets } from "../wallets/useWallets";
 import { is } from "date-fns/locale";
 
 const StyledFiltersContainer = styled.div`
-  display: flex;
+  display: ${(props) => (props.isVisible ? "flex" : "none")};
+  flex-direction: column;
   gap: 0.6rem;
   border-radius: 10px;
+  position: absolute;
+  right: 0;
+  top: 5rem;
+  background-color: var(--color-grey-600);
+  padding: 2rem;
+  z-index: 10;
+  width: 28rem;
+
+  select {
+    width: 100%;
+  }
 `;
 
-function TransactionsTableOperations() {
+function TransactionsTableOperations({ isVisible }) {
   const { isLoading, wallets } = useWallets();
 
+  console.log(isVisible);
+
   return (
-    <StyledFiltersContainer>
+    <StyledFiltersContainer isVisible={isVisible}>
       <FilterDrop
         filterField="type"
         options={[

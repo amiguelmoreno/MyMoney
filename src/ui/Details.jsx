@@ -10,6 +10,14 @@ const DetailsCard = styled.div`
   font-size: 1.8rem;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: 1fr 3fr 1fr;
+
+  @media (width <= 1050px) {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 3rem;
+    width: 35rem;
+  }
 `;
 const Title = styled.div`
   font-size: 3.4rem;

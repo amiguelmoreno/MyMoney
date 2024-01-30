@@ -27,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
   --color-indigo-100: #e0e7ff;
   --color-indigo-700: #4338ca;
  
-  --color-red-600: #f9376e;
+  --color-red-600: #fc4e80;
 
   --color-brand-50: #e0f2f1;
   --color-brand-100: #a0e8d0;
@@ -63,7 +63,7 @@ const GlobalStyles = createGlobalStyle`
 --color-indigo-100: #3730a3;
 --color-indigo-700: #e0e7ff;
 
-  --color-red-600: #f9376e;
+  --color-red-600: #fc4e80;
 
   --color-brand-900: #e0f2f1;
 --color-brand-800: #a0e8d0;
@@ -110,6 +110,10 @@ const GlobalStyles = createGlobalStyle`
 
 html {
   font-size: 62.5%;
+
+  @media (width <= 1500px) {
+    font-size: 50%;
+  }
 }
 
 body {

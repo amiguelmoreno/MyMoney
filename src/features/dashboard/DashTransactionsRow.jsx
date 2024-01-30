@@ -7,7 +7,6 @@ function DashTransactionsRow({ transaction }) {
     <Table.Row type={transaction.type}>
       <div>{formatCurrency(transaction.amount)}</div>
       <div>{formatDateDifference(transaction.date)}</div>
-      <div>{transaction.category}</div>
       <div>{transaction.status}</div>
     </Table.Row>
   );

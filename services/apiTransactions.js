@@ -85,7 +85,7 @@ export async function duplicateTransaction(originTransaction) {
 }
 
 export async function updateTransaction(id, newTransaction) {
-  console.log("this is the data", newTransaction);
+  console.log("this is the data", { ...newTransaction });
 
   // Realiza una actualización en la tabla de transacciones
 

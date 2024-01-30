@@ -13,16 +13,52 @@ import styled from "styled-components";
 import ChartBox from "../../ui/ChartBox";
 import Empty from "../../ui/Empty";
 import { useDashTransactionContext } from "./DashboardTransactionsContext";
+import { formatCurrency } from "../../utils/helpers";
 
 const ChartsContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  grid-template-columns: 1fr;
   grid-column: 1/3;
+  gap: 1rem;
 
   .recharts-legend-item-text {
     font-size: 18px !important;
     font-weight: 500;
+  }
+
+  @media (width <= 1250px) {
+    grid-column: 1/4;
+  }
+`;
+
+const StyledLegend = styled.ul`
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  gap: 0.2rem;
+  text-align: center;
+
+  @media (width <= 1250px) {
+    padding: 3rem;
+  }
+
+  @media (width <= 1250px) {
+    padding: 0rem;
+    font-size: 1.4rem;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+
+    .name {
+      text-align: left;
+    }
+
+    .percent,
+    .quantity {
+      text-align: end;
+    }
   }
 `;
 
@@ -38,6 +74,7 @@ const startDataExpenses = [
   { name: "Technology", value: 0, emoji: "🔌", color: "#7B68EE" },
   { name: "Debts", value: 0, emoji: "💳", color: "var(--color-red-600)" },
   { name: "Gifts", value: 0, emoji: "🎁", color: "#32CD32" },
+  { name: "Gym", value: 0, emoji: "🏋🏻", color: "#a8bcea" },
 ];
 
 const startDataIncomes = [
@@ -52,20 +89,7 @@ const startDataIncomes = [
   { name: "Technology", value: 0, emoji: "🔌", color: "#7B68EE" },
   { name: "Debts", value: 0, emoji: "💳", color: "var(--color-red-600)" },
   { name: "Gifts", value: 0, emoji: "🎁", color: "#32CD32" },
-];
-
-const COLORS = [
-  "#5E9A80",
-  "#F08080",
-  "#FFD700",
-  "#00FA9A",
-  "#797482",
-  "#00BFFF",
-  "#FF6347",
-  "#20B2AA",
-  "#7B68EE",
-  "#CD5C5C",
-  "#32CD32",
+  { name: "Gym", value: 0, emoji: "🏋🏻", color: "#a8bcea" },
 ];
 
 const RADIAN = Math.PI / 180;
@@ -92,6 +116,34 @@ const renderCustomizedLabel = ({
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
+  );
+};
+
+const renderLegend = ({ value, payload }) => {
+  console.log(payload);
+
+  const sortedPayload = payload
+    .slice()
+    .sort((a, b) => b.payload.value - a.payload.value);
+
+  return (
+    <StyledLegend>
+      {sortedPayload.map((entry, index) => {
+        console.log(entry.color);
+
+        return (
+          <li key={`item-${index}`} style={{ color: entry.color }}>
+            <div className="name">{entry.payload.name}</div>
+            <div className="quantity">
+              ${formatCurrency(entry.payload.value)}
+            </div>
+            <div className="percent">
+              ${(entry.payload.percent * 100).toFixed(1)}%
+            </div>
+          </li>
+        );
+      })}
+    </StyledLegend>
   );
 };
 
@@ -125,6 +177,10 @@ function prepareData(startData, transactions, type) {
 function ExpenseIncomeDistribution() {
   const { isLoading } = useTransactions();
   const { transactions } = useDashTransactionContext();
+  const alignmentProps =
+    window.innerWidth >= 850
+      ? { verticalAlign: "middle", align: "right", width: "50%" }
+      : { align: "center", verticalAlign: "bottom", width: "90%" };
 
   if (isLoading) return <Spinner></Spinner>;
 
@@ -140,15 +196,14 @@ function ExpenseIncomeDistribution() {
         {dataExpenses.length === 0 ? (
           <Empty resourceName="data"></Empty>
         ) : (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%">
             <PieChart width={400} height={400}>
               <Pie
                 data={dataExpenses}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={renderCustomizedLabel}
-                outerRadius={110}
+                outerRadius={100}
                 dataKey="value"
               >
                 {dataExpenses.map((entry, index) => (
@@ -157,11 +212,10 @@ function ExpenseIncomeDistribution() {
               </Pie>
               <Legend
                 iconType="circle"
-                layout="horizontal"
-                align="center"
-                width="100%"
-                height="28%"
-                verticalAlign="bottom"
+                layout="vertical"
+                height="auto"
+                content={(props) => renderLegend(props)}
+                {...alignmentProps}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -173,15 +227,14 @@ function ExpenseIncomeDistribution() {
         {dataIncomes.length === 0 ? (
           <Empty resourceName="data"></Empty>
         ) : (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%">
             <PieChart width={400} height={400}>
               <Pie
                 data={dataIncomes}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={renderCustomizedLabel}
-                outerRadius={110}
+                outerRadius={100}
                 dataKey="value"
               >
                 {dataIncomes.map((entry, index) => (
@@ -190,11 +243,10 @@ function ExpenseIncomeDistribution() {
               </Pie>
               <Legend
                 iconType="circle"
-                layout="horizontal"
-                verticalAlign="bottom"
-                width="100%"
-                height="28%"
-                align="center"
+                layout="vertical"
+                height="auto"
+                content={(props) => renderLegend(props)}
+                {...alignmentProps}
               />
             </PieChart>
           </ResponsiveContainer>

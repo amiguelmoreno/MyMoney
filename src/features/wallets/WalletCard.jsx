@@ -7,20 +7,21 @@ import { useEffect, useState } from "react";
 import { usedeleteWalletAndTransactions } from "./useDeleteWallet";
 import { useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../ui/Spinner";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 const Wallet = styled.div`
   position: relative;
   display: grid;
-  min-width: 30rem;
-  min-height: 18rem;
+  min-width: 25rem;
+  max-width: 25rem;
+  min-height: 15rem;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: center;
   border: 5px solid var(--color-brand-700);
-  padding: 2rem 3rem;
+  padding: 1rem 2rem;
   background-color: var(--color-grey-100);
   gap: 1rem;
-  row-gap: 2rem;
   border-radius: 10px;
   transition: all 0.3s;
 `;
@@ -31,7 +32,8 @@ const WalletIcon = styled.div`
   color: var(--color-brand-700);
 `;
 const WalletAmount = styled.div`
-  font-size: 3rem;
+  font-size: 2rem;
+  grid-column: span 2;
   font-weight: 600;
 `;
 const AccountName = styled.p`
@@ -84,27 +86,19 @@ const DropdownItem = styled.div`
 
 function WalletContainer({ wallet }) {
   const queryClient = useQueryClient();
-
   const { isLoading, transactionsFromWallet } = useGetTransactionsWallet(
     wallet.id
   );
-
   const { isDeleting, deleteWallet } = usedeleteWalletAndTransactions(
     wallet.id
   );
-
-  useEffect(() => {
-    if (!isDeleting) {
-      // Si la eliminación ha tenido éxito, forzar la recarga de datos
-      queryClient.invalidateQueries("wallets");
-    }
-  }, [isDeleting]);
-
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
   };
+
+  const ref = useOutsideClick(() => setIsDropdownVisible(false));
 
   function calcTotalAmount(wallet, transactions) {
     const totalAmount =
@@ -118,6 +112,13 @@ function WalletContainer({ wallet }) {
     return formatCurrency(totalAmount);
   }
 
+  useEffect(() => {
+    if (!isDeleting) {
+      // Si la eliminación ha tenido éxito, forzar la recarga de datos
+      queryClient.invalidateQueries("wallets");
+    }
+  }, [isDeleting]);
+
   if (isLoading) return <Spinner></Spinner>;
 
   return (
@@ -129,7 +130,7 @@ function WalletContainer({ wallet }) {
       <WalletAmount>
         {calcTotalAmount(wallet, transactionsFromWallet)}
       </WalletAmount>
-      <Dots onClick={toggleDropdown}>
+      <Dots onClick={toggleDropdown} ref={ref}>
         <HiDotsVertical />
       </Dots>
       {!isLoading && (

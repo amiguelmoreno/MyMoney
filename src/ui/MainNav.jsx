@@ -13,6 +13,16 @@ const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+
+  @media (width <= 1050px) {
+    flex-direction: row;
+    align-items: center;
+
+    li {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -53,6 +63,22 @@ const StyledNavLink = styled(NavLink)`
   &.active:visited svg {
     color: var(--color-brand-600);
   }
+
+  @media (width <= 1050px) {
+    display: flex;
+    flex-direction: column;
+
+    &:link,
+    &:visited {
+      padding: 1rem 2rem;
+    }
+  }
+
+  @media (width <= 600px) {
+    span {
+      display: none;
+    }
+  }
 `;
 
 function MainNav() {
@@ -75,13 +101,6 @@ function MainNav() {
           <StyledNavLink to="/wallets">
             <HiMiniWallet />
             <span>Wallets</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/settings">
-            <GrSettingsOption />
-
-            <span>Settings</span>
           </StyledNavLink>
         </li>
       </NavList>

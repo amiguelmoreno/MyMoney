@@ -6,7 +6,8 @@ export function useUpdateTransaction() {
   const queryClient = useQueryClient();
 
   const { isLoading: isEditing, mutate: updateTransaction } = useMutation({
-    mutationFn: updateTransactionApi,
+    mutationFn: (variables) =>
+      updateTransactionApi(variables.id, variables.data), // Pasa el ID y los nuevos datos
     onSuccess: () => {
       toast.success("Transaction edited");
 

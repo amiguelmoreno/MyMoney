@@ -14,7 +14,7 @@ function CreateWalletForm({ onCloseModal, wallet }) {
 
   async function onSubmit(data) {
     // Convertir el campo 'name' a mayúsculas antes de enviarlo
-    data.name = data.name.toUpperCase();
+    data.name = data.name?.toUpperCase();
 
     try {
       await createWallet(data);
@@ -37,6 +37,10 @@ function CreateWalletForm({ onCloseModal, wallet }) {
             defaultValue={wallet?.name || "b"}
             {...register("name", {
               required: "This field is required",
+              maxLength: {
+                value: 6, // Establece el límite máximo de caracteres según tus necesidades
+                message: "Maximum 6 characters",
+              },
             })}
           />
         </FormRow>
@@ -71,6 +75,10 @@ function CreateWalletForm({ onCloseModal, wallet }) {
             defaultValue={wallet?.owner || "Migue"}
             {...register("owner", {
               required: "This field is required",
+              maxLength: {
+                value: 6, // Establece el límite máximo de caracteres según tus necesidades
+                message: "Maximum 6 characters",
+              },
             })}
           />
         </FormRow>

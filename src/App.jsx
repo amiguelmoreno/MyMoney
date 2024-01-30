@@ -4,7 +4,6 @@ import Transactions from "./pages/Transactions";
 import Wallets from "./pages/Wallets";
 import AppLayout from "./ui/AppLayout";
 import GlobalStyles from "./ui/GlobalStyles";
-import Settings from "./pages/Settings";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -44,7 +43,6 @@ function App() {
                 ></Route>
                 <Route path="transactions" element={<Transactions />}></Route>
                 <Route path="wallets" element={<Wallets />}></Route>
-                <Route path="settings" element={<Settings />}></Route>
               </Route>
 
               {/*  <Route path="login" element={<Login />} />
