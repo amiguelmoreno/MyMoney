@@ -62,8 +62,8 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
 
   return (
     <>
-      {type === "create" && <Heading>New transaction</Heading>}
-      {type === "edit" && <Heading>Edit transaction</Heading>}
+      {type === "create" && <Heading as="h2">New transaction</Heading>}
+      {type === "edit" && <Heading as="h2">Edit transaction</Heading>}
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormRow label="Type" error={errors?.income?.message}>
           <Select

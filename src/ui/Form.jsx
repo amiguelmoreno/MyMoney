@@ -8,6 +8,16 @@ const Form = styled.form`
 
   @media (width <= 850px) {
     font-size: 1.1rem;
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+    }
+
+    button {
+      font-size: 1.1rem;
+    }
   }
 
   ${(props) =>
