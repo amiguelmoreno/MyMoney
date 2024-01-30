@@ -29,6 +29,7 @@ const StyledChartBox = styled.div`
   ${(props) =>
     props.type === "ring" &&
     css`
+      width: 100%;
       height: 30rem;
     `}
 `;
