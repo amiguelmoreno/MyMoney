@@ -4,6 +4,9 @@ import { useTransactions } from "./useTransactions";
 import { useCreateTransaction } from "./useCreateTransaction";
 import { DATA as transactionsData } from "../../../data/data-transactions";
 import { useCreateWallet } from "../wallets/useCreateWallet";
+import Button from "../../ui/Button";
+import { useEffect } from "react";
+import { useWallets } from "../wallets/useWallets";
 
 function TransactionsGenerator() {
   const { transactions } = useTransactions();
@@ -17,7 +20,9 @@ function TransactionsGenerator() {
       owner: "Migue",
     });
 
-    transactionsData.forEach((transaction) => createTransaction(transaction));
+    for (const transaction of transactionsData) {
+      createTransaction(transaction);
+    }
   }
 
   if (!transactions) return <></>;
@@ -25,9 +30,7 @@ function TransactionsGenerator() {
   return (
     <div>
       {!transactions.length && (
-        <ButtonWithIcon icon={<HiMiniPlus />} onClick={handleClick}>
-          Generate some transactions
-        </ButtonWithIcon>
+        <Button onClick={handleClick}>Generate some transactions</Button>
       )}
     </div>
   );

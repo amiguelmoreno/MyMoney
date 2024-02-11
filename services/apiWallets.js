@@ -64,7 +64,7 @@ export async function deleteWalletAndTransactions(walletId) {
       .eq("wallet_id", walletId);
 
     if (transactionsError) {
-      console.error("Error al eliminar transacciones:", transactionsError);
+      console.error("Error deleting transactions:", transactionsError);
       return;
     }
 
@@ -77,13 +77,13 @@ export async function deleteWalletAndTransactions(walletId) {
       .eq("id", walletId);
 
     if (walletError) {
-      console.error("Error al eliminar wallet:", walletError);
+      console.error("Error deleting wallet:", walletError);
       return;
     }
 
     //console.log("Wallet eliminada:", wallet);
     return wallet;
   } catch (error) {
-    console.error("Error inesperado:", error.message);
+    console.error("Unexpected error:", error.message);
   }
 }

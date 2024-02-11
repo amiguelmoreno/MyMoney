@@ -14,7 +14,7 @@ function Transactions() {
       </Row>
       <Row>
         <TransactionsTable></TransactionsTable>
-        <TransactionsGenerator></TransactionsGenerator>
+        {/*  <TransactionsGenerator></TransactionsGenerator> */}
       </Row>
     </>
   );

@@ -16,6 +16,17 @@ export async function createTransaction(newTransaction) {
   console.log(newTransaction);
   let query = supabase.from("transactions");
 
+  // Obtiene la cartera asociada a la transacción por el campo 'name'
+  const { data: wallet } = await supabase
+    .from("wallets")
+    .select("id")
+    .eq("name", newTransaction.account) // Asociar transacciones por el campo 'account'
+    .single();
+
+  if (!wallet) {
+    throw new Error("Couldn't find a wallet to this transaction.");
+  }
+
   query = query.insert([{ ...newTransaction }]);
 
   const { data: newTransactionCreated, error } = await query.select().single();
@@ -28,19 +39,6 @@ export async function createTransaction(newTransaction) {
   /*  console.log(newTransactionCreated);
   console.log("newtrans");
   console.log(newTransaction); */
-
-  // Obtiene la cartera asociada a la transacción por el campo 'name'
-  const { data: wallet } = await supabase
-    .from("wallets")
-    .select("id")
-    .eq("name", newTransaction.account) // Asociar transacciones por el campo 'account'
-    .single();
-
-  if (!wallet) {
-    throw new Error(
-      "No se pudo encontrar la cartera asociada a esta transacción."
-    );
-  }
 
   // Asigna el wallet_id a la transacción
   await supabase
@@ -97,7 +95,7 @@ export async function updateTransaction(id, newTransaction) {
     .single();
 
   if (error) {
-    console.error("Error al actualizar la transacción:", error.message);
+    console.error("Error updating transaction:", error.message);
     return null;
   }
 
