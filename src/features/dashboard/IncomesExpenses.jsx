@@ -48,7 +48,7 @@ function prepareData(startData, transactions) {
   const data = transactions.reduce((arr, cur) => {
     const type = cur.type;
     if (type === "income") return incArrayValue(arr, "income", cur.amount);
-    if (type === "expense") return incArrayValue(arr, "expense", -cur.amount);
+    if (type === "expense") return incArrayValue(arr, "expense", cur.amount);
 
     return arr;
   }, startData);

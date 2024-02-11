@@ -8,14 +8,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Textarea from "../../ui/Textarea";
 import { useCreateTransaction } from "./useCreateTransaction";
-//import { useDeleteTransaction } from "./useDeleteTransaction";
 import { useUpdateTransaction } from "./useUpdateTransaction";
 import { useWallets } from "../wallets/useWallets";
 import SpinnerMini from "../../ui/Spinner";
-//import { updateTransaction } from "../../../services/apiTransactions.js";
 
 function CreateTransactionForm({ onCloseModal, type, transaction }) {
-  //const { deleteTransaction } = useDeleteTransaction();
   const { createTransaction } = useCreateTransaction();
   const { updateTransaction } = useUpdateTransaction();
   const { register, reset, handleSubmit, formState } = useForm();
@@ -30,8 +27,9 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
     try {
       if (!transaction) createTransaction(data);
 
+      console.log(data);
+
       if (transaction) {
-        // check si transaction amount, account, category, concept, date, description, status, type
         console.log(data.amount);
         console.log(transaction.amount);
 
@@ -86,7 +84,7 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
             {...register("concept", {
               required: "This field is required",
               maxLength: {
-                value: 15, // Establece el límite máximo de caracteres según tus necesidades
+                value: 15,
                 message: "Maximum 15 characters",
               },
             })}

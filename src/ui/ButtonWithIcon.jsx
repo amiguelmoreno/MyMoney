@@ -5,6 +5,7 @@ const StyledButtonWithIcon = styled.button`
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
   display: flex;
+  width: max-content;
   align-items: center;
   justify-content: center;
   gap: 2rem;

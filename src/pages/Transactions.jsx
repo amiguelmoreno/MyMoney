@@ -1,8 +1,8 @@
 import Row from "../ui/Row";
 import TransactionsTable from "../features/transactions/TransactionsTable";
 import Heading from "../ui/Heading";
-import TransactionsTableOperations from "../features/transactions/TransactionsTableOperations";
 import FilterModal from "../features/transactions/FilterModal";
+import TransactionsGenerator from "../features/transactions/TransactionsGenerator";
 
 function Transactions() {
   return (
@@ -14,6 +14,7 @@ function Transactions() {
       </Row>
       <Row>
         <TransactionsTable></TransactionsTable>
+        <TransactionsGenerator></TransactionsGenerator>
       </Row>
     </>
   );

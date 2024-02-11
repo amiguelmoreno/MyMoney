@@ -7,6 +7,7 @@ import { useDashTransactionContext } from "./DashboardTransactionsContext";
 import Spinner from "../../ui/Spinner";
 import { useEffect } from "react";
 import { useState } from "react";
+import Heading from "../../ui/Heading";
 
 const StyledListaConEstilo = styled.div`
   display: flex;
@@ -18,6 +19,11 @@ const StyledListaConEstilo = styled.div`
   font-size: 1.6rem;
   font-weight: 400;
 
+  h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
   @media (width <= 1000px) {
     justify-self: center;
   }
@@ -26,7 +32,7 @@ const StyledListaConEstilo = styled.div`
 const StyledItemLista = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin: 5px;
   align-items: end;
   width: max-content;
 `;
@@ -100,6 +106,7 @@ function ResumeData() {
 
   return (
     <StyledListaConEstilo>
+      <Heading as="h2">Resume</Heading>
       {data.map((info, index) => (
         <StyledItemLista key={index}>
           <StyledDato>

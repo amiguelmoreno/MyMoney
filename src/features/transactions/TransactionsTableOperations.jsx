@@ -25,8 +25,6 @@ const StyledFiltersContainer = styled.div`
 function TransactionsTableOperations({ isVisible }) {
   const { isLoading, wallets } = useWallets();
 
-  console.log(isVisible);
-
   return (
     <StyledFiltersContainer isVisible={isVisible}>
       <FilterDrop

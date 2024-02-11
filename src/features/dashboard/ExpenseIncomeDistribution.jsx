@@ -120,8 +120,6 @@ const renderCustomizedLabel = ({
 };
 
 const renderLegend = ({ value, payload }) => {
-  console.log(payload);
-
   const sortedPayload = payload
     .slice()
     .sort((a, b) => b.payload.value - a.payload.value);
@@ -129,8 +127,6 @@ const renderLegend = ({ value, payload }) => {
   return (
     <StyledLegend>
       {sortedPayload.map((entry, index) => {
-        console.log(entry.color);
-
         return (
           <li key={`item-${index}`} style={{ color: entry.color }}>
             <div className="name">{entry.payload.name}</div>
@@ -163,9 +159,7 @@ function prepareData(startData, transactions, type) {
 
     // Solo incrementar si el tipo es "expense"
     if (cur.type.toLowerCase() === type) {
-      if (type === "expense") return incArrayValue(arr, category, -cur.amount);
-
-      if (type === "income") return incArrayValue(arr, category, cur.amount);
+      return incArrayValue(arr, category, cur.amount);
     }
 
     return arr;
@@ -186,8 +180,6 @@ function ExpenseIncomeDistribution() {
 
   const dataExpenses = prepareData(startDataExpenses, transactions, "expense");
   const dataIncomes = prepareData(startDataIncomes, transactions, "income");
-
-  console.log(dataExpenses);
 
   return (
     <ChartsContainer>
