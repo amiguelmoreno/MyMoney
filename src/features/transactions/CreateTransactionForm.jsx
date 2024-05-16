@@ -60,26 +60,26 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
 
   return (
     <>
-      {type === "create" && <Heading as="h2">New transaction</Heading>}
-      {type === "edit" && <Heading as="h2">Edit transaction</Heading>}
+      {type === "create" && <Heading as='h2'>New transaction</Heading>}
+      {type === "edit" && <Heading as='h2'>Edit transaction</Heading>}
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormRow label="Type" error={errors?.income?.message}>
+        <FormRow label='Type' error={errors?.income?.message}>
           <Select
-            type="text"
-            id="type"
+            type='text'
+            id='type'
             defaultValue={transaction?.type || "income"}
             {...register("type", {
               required: "This field is required",
             })}
           >
-            <option value="income">💰 Income</option>
-            <option value="expense">💸 Expense</option>
+            <option value='income'>💰 Income</option>
+            <option value='expense'>💸 Expense</option>
           </Select>
         </FormRow>
-        <FormRow label="Concept" error={errors?.concept?.message}>
+        <FormRow label='Concept' error={errors?.concept?.message}>
           <Input
-            type="text"
-            id="concept"
+            type='text'
+            id='concept'
             defaultValue={transaction?.concept || "b"}
             {...register("concept", {
               required: "This field is required",
@@ -91,10 +91,10 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
           />
         </FormRow>
 
-        <FormRow label="Amount" error={errors?.amount?.message}>
+        <FormRow label='Amount' error={errors?.amount?.message}>
           <Input
-            type="text"
-            id="amount"
+            type='text'
+            id='amount'
             defaultValue={
               transaction?.amount < 0
                 ? -transaction?.amount
@@ -118,12 +118,14 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
           />
         </FormRow>
 
-        <FormRow label="Date" error={errors?.date?.message}>
+        <FormRow label='Date' error={errors?.date?.message}>
           <Input
-            type="date"
-            id="date"
+            type='date'
+            id='date'
             max={currentDate}
-            defaultValue={transaction?.date || "2024-01-12"}
+            defaultValue={
+              transaction?.date || new Date().toISOString().split("T")[0]
+            }
             {...register("date", {
               required: "This field is required",
             })}
@@ -133,10 +135,10 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
         {isLoading ? (
           <SpinnerMini></SpinnerMini>
         ) : (
-          <FormRow label="Account" error={errors?.account?.message}>
+          <FormRow label='Account' error={errors?.account?.message}>
             <Select
-              type="text"
-              id="account"
+              type='text'
+              id='account'
               defaultValue={transaction?.account}
               {...register("account", {
                 required:
@@ -153,13 +155,13 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
         )}
 
         <FormRow
-          label="Transaction details"
+          label='Transaction details'
           error={errors?.description?.message}
         >
           <Textarea
-            type="number"
-            id="description"
-            placeholder="Some details about the transaction..."
+            type='number'
+            id='description'
+            placeholder='Some details about the transaction...'
             {...register("description", {
               maxLength: {
                 value: 150, // Establece el límite máximo de caracteres según tus necesidades
@@ -169,51 +171,51 @@ function CreateTransactionForm({ onCloseModal, type, transaction }) {
           />
         </FormRow>
 
-        <FormRow label="Status" error={errors?.status?.message}>
+        <FormRow label='Status' error={errors?.status?.message}>
           <Select
-            type="text"
-            id="status"
+            type='text'
+            id='status'
             defaultValue={transaction?.status || "finished"}
             {...register("status", {
               required: "This field is required",
             })}
           >
-            <option value="completed">✅ Completed</option>
-            <option value="pending">🟠 Pending</option>
+            <option value='completed'>✅ Completed</option>
+            <option value='pending'>🟠 Pending</option>
           </Select>
         </FormRow>
 
-        <FormRow label="Category" error={errors?.status?.category}>
+        <FormRow label='Category' error={errors?.status?.category}>
           <Select
-            type="text"
-            id="category"
+            type='text'
+            id='category'
             defaultValue={transaction?.category || "groceries"}
             {...register("category", {
               required: "This field is required",
             })}
           >
-            <option value="groceries">🛒 Groceries</option>
-            <option value="housing">🏠 Housing</option>
-            <option value="transportation">🚗 Transportation</option>
-            <option value="health">🏥 Health</option>
-            <option value="entertainment">🎬 Entertainment</option>
-            <option value="education">📚 Education</option>
-            <option value="clothing">👕 Clothing</option>
-            <option value="travels">✈️ Travels</option>
-            <option value="technology">🔌 Technology</option>
-            <option value="debts">💳 Debts</option>
-            <option value="gifts">🎁 Gifts</option>
-            <option value="gym">🏋🏻 Gym</option>
+            <option value='groceries'>🛒 Groceries</option>
+            <option value='housing'>🏠 Housing</option>
+            <option value='transportation'>🚗 Transportation</option>
+            <option value='health'>🏥 Health</option>
+            <option value='entertainment'>🎬 Entertainment</option>
+            <option value='education'>📚 Education</option>
+            <option value='clothing'>👕 Clothing</option>
+            <option value='travels'>✈️ Travels</option>
+            <option value='technology'>🔌 Technology</option>
+            <option value='debts'>💳 Debts</option>
+            <option value='gifts'>🎁 Gifts</option>
+            <option value='gym'>🏋🏻 Gym</option>
           </Select>
         </FormRow>
 
         <FormRow>
-          <Button variation="secondary" type="reset" onClick={onCloseModal}>
+          <Button variation='secondary' type='reset' onClick={onCloseModal}>
             Cancel
           </Button>
 
-          {type === "create" && <Button type="submit">Add Transaction</Button>}
-          {type === "edit" && <Button type="submit">Edit Transaction</Button>}
+          {type === "create" && <Button type='submit'>Add Transaction</Button>}
+          {type === "edit" && <Button type='submit'>Edit Transaction</Button>}
         </FormRow>
       </Form>
     </>
