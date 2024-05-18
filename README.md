@@ -45,7 +45,7 @@
 The main goal of this proyect is to use almost everything I have learnt about React, using a lot of main functionalities of React, Supabase and more.
 <br />
 <br />
-### What did I used to get the best of this project?
+### What did I learn this project?
 
   * React-router-dom
   * React-Query
