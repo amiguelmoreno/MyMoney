@@ -110,9 +110,9 @@ const renderCustomizedLabel = ({
     <text
       x={x}
       y={y}
-      fill="var(--color-grey-700)"
+      fill='var(--color-grey-700)'
       textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
+      dominantBaseline='central'
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
@@ -129,11 +129,11 @@ const renderLegend = ({ value, payload }) => {
       {sortedPayload.map((entry, index) => {
         return (
           <li key={`item-${index}`} style={{ color: entry.color }}>
-            <div className="name">{entry.payload.name}</div>
-            <div className="quantity">
+            <div className='name'>{entry.payload.name}</div>
+            <div className='quantity'>
               ${formatCurrency(entry.payload.value)}
             </div>
-            <div className="percent">
+            <div className='percent'>
               ${(entry.payload.percent * 100).toFixed(1)}%
             </div>
           </li>
@@ -144,24 +144,19 @@ const renderLegend = ({ value, payload }) => {
 };
 
 function prepareData(startData, transactions, type) {
-  // A bit ugly code, but sometimes this is what it takes when working with real data 😅
-
   function incArrayValue(arr, field, amount) {
     return arr.map((obj) =>
       obj.name.toLowerCase() === field.toLowerCase()
-        ? { ...obj, value: obj.value + amount }
+        ? { ...obj, value: obj.value + Math.abs(amount) } // Aquí aplicamos el valor absoluto
         : obj
     );
   }
 
   const data = transactions.reduce((arr, cur) => {
     const category = cur.category.toLowerCase();
-
-    // Solo incrementar si el tipo es "expense"
     if (cur.type.toLowerCase() === type) {
       return incArrayValue(arr, category, cur.amount);
     }
-
     return arr;
   }, startData);
 
@@ -183,29 +178,29 @@ function ExpenseIncomeDistribution() {
 
   return (
     <ChartsContainer>
-      <ChartBox type="cheese">
-        <Heading as="h2">Expenses Distribution</Heading>
+      <ChartBox type='cheese'>
+        <Heading as='h2'>Expenses Distribution</Heading>
         {dataExpenses.length === 0 ? (
-          <Empty resourceName="data"></Empty>
+          <Empty resourceName='data'></Empty>
         ) : (
-          <ResponsiveContainer width="100%">
+          <ResponsiveContainer width='100%'>
             <PieChart width={400} height={400}>
               <Pie
                 data={dataExpenses}
-                cx="50%"
-                cy="50%"
+                cx='50%'
+                cy='50%'
                 labelLine={false}
                 outerRadius={100}
-                dataKey="value"
+                dataKey='value'
               >
                 {dataExpenses.map((entry, index) => (
                   <Cell fill={entry.color} key={index} stroke={entry.color} />
                 ))}
               </Pie>
               <Legend
-                iconType="circle"
-                layout="vertical"
-                height="auto"
+                iconType='circle'
+                layout='vertical'
+                height='auto'
                 content={(props) => renderLegend(props)}
                 {...alignmentProps}
               />
@@ -214,29 +209,29 @@ function ExpenseIncomeDistribution() {
         )}
       </ChartBox>
 
-      <ChartBox type="cheese">
-        <Heading as="h2">Incomes Distribution</Heading>
+      <ChartBox type='cheese'>
+        <Heading as='h2'>Incomes Distribution</Heading>
         {dataIncomes.length === 0 ? (
-          <Empty resourceName="data"></Empty>
+          <Empty resourceName='data'></Empty>
         ) : (
-          <ResponsiveContainer width="100%">
+          <ResponsiveContainer width='100%'>
             <PieChart width={400} height={400}>
               <Pie
                 data={dataIncomes}
-                cx="50%"
-                cy="50%"
+                cx='50%'
+                cy='50%'
                 labelLine={false}
                 outerRadius={100}
-                dataKey="value"
+                dataKey='value'
               >
                 {dataIncomes.map((entry, index) => (
                   <Cell fill={entry.color} key={index} stroke={entry.color} />
                 ))}
               </Pie>
               <Legend
-                iconType="circle"
-                layout="vertical"
-                height="auto"
+                iconType='circle'
+                layout='vertical'
+                height='auto'
                 content={(props) => renderLegend(props)}
                 {...alignmentProps}
               />
